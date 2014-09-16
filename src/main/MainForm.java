@@ -5,9 +5,15 @@
 package main;
 
 import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
 import javax.swing.*;
 import com.jgoodies.forms.factories.*;
 import com.jgoodies.forms.layout.*;
+import entity.Cluster;
+import entity.ObservationContainer;
+import logic.strategy.ClusterizationContext;
+import logic.strategy.impl.KMeansStrategy;
 
 /**
  * @author unknown
@@ -17,29 +23,45 @@ public class MainForm extends JFrame {
         initComponents();
     }
 
+    private void kMeansBtnActionPerformed(ActionEvent e) {
+        int observationCount =
+                Integer.parseInt(observationCountTxt.getText());
+
+        int clusterCount =
+                Integer.parseInt(clusterCountTxt.getText());
+
+        ClusterizationContext context =
+                new ClusterizationContext(new KMeansStrategy());
+
+        ObservationContainer container =
+                new ObservationContainer(observationCount);
+
+        java.util.List<Cluster> clusters =
+                context.executeStrategy(null, container, clusterCount);
+
+        for(Cluster cluster : clusters) {
+            System.out.println(cluster.toString());
+        }
+
+    }
+
     private void initComponents() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        imageHolder = new JPanel();
+        imageHolder = new ImageHolder();
         controlHolder = new JPanel();
         label1 = new JLabel();
-        textField1 = new JTextField();
+        observationCountTxt = new JTextField();
         label2 = new JLabel();
-        textField2 = new JTextField();
+        clusterCountTxt = new JTextField();
         kMeansBtn = new JButton();
         maximinBtn = new JButton();
 
         //======== this ========
         Container contentPane = getContentPane();
         contentPane.setLayout(new FormLayout(
-            "592dlu, $lcgap, 90dlu",
-            "397dlu"));
-
-        //======== imageHolder ========
-        {
-            imageHolder.setLayout(new FormLayout(
-                "592dlu",
-                "397dlu"));
-        }
+            "592dlu, $lcgap, 95dlu",
+            "433dlu"));
         contentPane.add(imageHolder, CC.xy(1, 1, CC.DEFAULT, CC.FILL));
 
         //======== controlHolder ========
@@ -53,6 +75,12 @@ public class MainForm extends JFrame {
 
             //---- kMeansBtn ----
             kMeansBtn.setText("K-means");
+            kMeansBtn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    kMeansBtnActionPerformed(e);
+                }
+            });
 
             //---- maximinBtn ----
             maximinBtn.setText("Maximin");
@@ -64,23 +92,24 @@ public class MainForm extends JFrame {
                     .addGroup(controlHolderLayout.createSequentialGroup()
                         .addGroup(controlHolderLayout.createParallelGroup()
                             .addGroup(controlHolderLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addGroup(controlHolderLayout.createParallelGroup()
-                                    .addComponent(kMeansBtn, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(label1)))
+                                    .addGap(6, 6, 6)
+                                    .addComponent(label1))
                             .addGroup(controlHolderLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(textField1, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE))
+                                    .addContainerGap()
+                                    .addComponent(observationCountTxt, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE))
                             .addGroup(controlHolderLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(label2, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE))
+                                    .addContainerGap()
+                                    .addComponent(label2, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE))
                             .addGroup(controlHolderLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(textField2, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE))
+                                    .addContainerGap()
+                                    .addComponent(clusterCountTxt, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE))
                             .addGroup(controlHolderLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(maximinBtn, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(5, Short.MAX_VALUE))
+                                    .addContainerGap()
+                                    .addComponent(kMeansBtn, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE))
+                            .addGroup(controlHolderLayout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addComponent(maximinBtn, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
             controlHolderLayout.setVerticalGroup(
                 controlHolderLayout.createParallelGroup()
@@ -88,14 +117,14 @@ public class MainForm extends JFrame {
                         .addGap(12, 12, 12)
                         .addComponent(label1)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(observationCountTxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(label2)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(textField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addGap(46, 46, 46)
-                        .addComponent(kMeansBtn)
+                        .addComponent(clusterCountTxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
+                        .addComponent(kMeansBtn)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(maximinBtn)
                         .addContainerGap())
             );
@@ -107,13 +136,26 @@ public class MainForm extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JPanel imageHolder;
+    private ImageHolder imageHolder;
     private JPanel controlHolder;
     private JLabel label1;
-    private JTextField textField1;
+    private JTextField observationCountTxt;
     private JLabel label2;
-    private JTextField textField2;
+    private JTextField clusterCountTxt;
     private JButton kMeansBtn;
     private JButton maximinBtn;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
+
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable(){
+
+            @Override
+            public void run() {
+                new MainForm().setVisible(true);
+            }
+
+        });
+
+    }
 }

@@ -9,17 +9,18 @@ import java.awt.image.BufferedImage;
  */
 public class ImageHolder extends JPanel {
 
+    public static final int IMG_WIDTH = 1050;
+    public static final int IMG_HEIGHT = 710;
+
     private BufferedImage canvas = null;
     private Graphics2D imgGraphics = null;
 
     public ImageHolder() {
-        int imgWidth = getWidth();
-        int imgHeight = getHeight();
-        canvas = new BufferedImage(imgWidth, imgHeight, BufferedImage.TYPE_INT_RGB);
+        canvas = new BufferedImage(IMG_WIDTH, IMG_HEIGHT, BufferedImage.TYPE_INT_RGB);
         imgGraphics = canvas.createGraphics();
-        //imgGraphics.setColor(Color.BLUE);
-        //imgGraphics.fillRect(0,  0,  imgWidth, imgHeight);
-        setPreferredSize(new Dimension(imgWidth, imgHeight));
+        imgGraphics.setColor(Color.WHITE);
+        imgGraphics.fillRect(0,  0,  IMG_WIDTH, IMG_HEIGHT);
+        setPreferredSize(new Dimension(IMG_WIDTH, IMG_HEIGHT));
     }
 
     @Override

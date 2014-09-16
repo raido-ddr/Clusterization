@@ -1,7 +1,9 @@
 package entity;
 
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 public class ObservationContainer {
 
@@ -24,9 +26,18 @@ public class ObservationContainer {
         List<Cluster> clusters = new ArrayList<Cluster>();
 
         for(int i = 0; i < clusterCount; i++) {
-            clusters.add(new Cluster(getRandomObservation()));
+            clusters.add(new Cluster(getRandomObservation(), getRandomColor()));
         }
         return clusters;
+    }
+
+    private Color getRandomColor() {
+        Random rand = new Random();
+        float r = rand.nextFloat();
+        float g = rand.nextFloat();
+        float b = rand.nextFloat();
+
+        return new Color(r, g, b);
     }
 
 

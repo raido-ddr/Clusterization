@@ -22,6 +22,8 @@ public class KMeansStrategy implements ClusterizationStrategy {
             for (Observation observation : container.getObservations()) {
                 assignCluster(clusters, observation);
             }
+
+
         } while (! isOptimal(clusters));
 
         return clusters;

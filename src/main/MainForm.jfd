@@ -4,21 +4,18 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "592dlu, labelcompgap, 90dlu"
-			"$rowSpecs": "397dlu"
+			"$columnSpecs": "592dlu, labelcompgap, 95dlu"
+			"$rowSpecs": "433dlu"
 		} ) {
 			name: "this"
-			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-				"$columnSpecs": "592dlu"
-				"$rowSpecs": "397dlu"
-			} ) {
+			add( new FormComponent( "main.ImageHolder" ) {
 				name: "imageHolder"
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq {par l {seq l {space :p:6:p, par l {comp kMeansBtn::l:p:116:p, comp label1:::p::p}}, seq l {space :::p, comp textField1:::p:116:p}, seq l {space :::p, comp label2:::p:116:p}, seq l {space :::p, comp textField2:::p:116:p}, seq l {space :::p, comp maximinBtn:::p:116:p}}, space ::5:x}}"
-				"$verticalGroup": "par l {seq {space :p:12:p, comp label1:::p::p, space :::p, comp textField1:::p::p, space s:::p, comp label2:::p::p, space u:::p, comp textField2:::p::p, space :p:46:p, comp kMeansBtn:::p::p, space s:::p, comp maximinBtn:::p::p, space :::p}}"
+				"$horizontalGroup": "par l {seq {par l {seq l {space :p:6:p, comp label1:::p::p}, seq l {space :::p, comp observationCountTxt:::p:116:p}, seq l {space :::p, comp label2:::p:116:p}, seq l {space :::p, comp clusterCountTxt:::p:116:p}, seq l {space :::p, comp kMeansBtn:::p:116:p}, seq l {space :::p, comp maximinBtn:::p:116:p}}, space :::x}}"
+				"$verticalGroup": "par l {seq {space :p:12:p, comp label1:::p::p, space :::p, comp observationCountTxt:::p::p, space s:::p, comp label2:::p::p, space u:::p, comp clusterCountTxt:::p::p, space s:::p, comp kMeansBtn:::p::p, space u:::p, comp maximinBtn:::p::p, space :::p}}"
 			} ) {
 				name: "controlHolder"
 				add( new FormComponent( "javax.swing.JLabel" ) {
@@ -26,18 +23,19 @@ new FormModel {
 					"text": "Number of observations:"
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
-					name: "textField1"
+					name: "observationCountTxt"
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label2"
 					"text": "Number of clusters:"
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
-					name: "textField2"
+					name: "clusterCountTxt"
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "kMeansBtn"
 					"text": "K-means"
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "kMeansBtnActionPerformed", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "maximinBtn"
@@ -51,7 +49,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 1040, 630 )
+			"size": new java.awt.Dimension( 1040, 685 )
 		} )
 	}
 }

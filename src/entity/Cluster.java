@@ -15,8 +15,9 @@ public class Cluster {
 
     private Color color;
 
-    public Cluster(Observation mean) {
+    public Cluster(Observation mean, Color color) {
         this.mean = mean;
+        this.color = color;
     }
 
     public List<Observation> getObservations() {
