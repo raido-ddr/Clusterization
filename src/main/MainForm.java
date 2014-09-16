@@ -19,14 +19,14 @@ public class MainForm extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        panel1 = new JPanel();
-        panel2 = new JPanel();
+        imageHolder = new JPanel();
+        controlHolder = new JPanel();
         label1 = new JLabel();
         textField1 = new JTextField();
         label2 = new JLabel();
         textField2 = new JTextField();
-        button1 = new JButton();
-        button2 = new JButton();
+        kMeansBtn = new JButton();
+        maximinBtn = new JButton();
 
         //======== this ========
         Container contentPane = getContentPane();
@@ -34,52 +34,86 @@ public class MainForm extends JFrame {
             "592dlu, $lcgap, 90dlu",
             "397dlu"));
 
-        //======== panel1 ========
+        //======== imageHolder ========
         {
-            panel1.setLayout(new FormLayout(
+            imageHolder.setLayout(new FormLayout(
                 "592dlu",
                 "397dlu"));
         }
-        contentPane.add(panel1, CC.xy(1, 1, CC.DEFAULT, CC.FILL));
+        contentPane.add(imageHolder, CC.xy(1, 1, CC.DEFAULT, CC.FILL));
 
-        //======== panel2 ========
+        //======== controlHolder ========
         {
-            panel2.setLayout(new FormLayout(
-                "97dlu",
-                "25dlu, 8*($lgap, default)"));
 
             //---- label1 ----
             label1.setText("Number of observations:");
-            panel2.add(label1, CC.xy(1, 1));
-            panel2.add(textField1, CC.xy(1, 3));
 
             //---- label2 ----
             label2.setText("Number of clusters:");
-            panel2.add(label2, CC.xy(1, 7));
-            panel2.add(textField2, CC.xy(1, 9));
 
-            //---- button1 ----
-            button1.setText("K-means");
-            panel2.add(button1, CC.xy(1, 13));
+            //---- kMeansBtn ----
+            kMeansBtn.setText("K-means");
 
-            //---- button2 ----
-            button2.setText("Maximin");
-            panel2.add(button2, CC.xy(1, 17));
+            //---- maximinBtn ----
+            maximinBtn.setText("Maximin");
+
+            GroupLayout controlHolderLayout = new GroupLayout(controlHolder);
+            controlHolder.setLayout(controlHolderLayout);
+            controlHolderLayout.setHorizontalGroup(
+                controlHolderLayout.createParallelGroup()
+                    .addGroup(controlHolderLayout.createSequentialGroup()
+                        .addGroup(controlHolderLayout.createParallelGroup()
+                            .addGroup(controlHolderLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(controlHolderLayout.createParallelGroup()
+                                    .addComponent(kMeansBtn, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(label1)))
+                            .addGroup(controlHolderLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(textField1, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE))
+                            .addGroup(controlHolderLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(label2, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE))
+                            .addGroup(controlHolderLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(textField2, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE))
+                            .addGroup(controlHolderLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(maximinBtn, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(5, Short.MAX_VALUE))
+            );
+            controlHolderLayout.setVerticalGroup(
+                controlHolderLayout.createParallelGroup()
+                    .addGroup(controlHolderLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(label1)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(label2)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(textField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46)
+                        .addComponent(kMeansBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(maximinBtn)
+                        .addContainerGap())
+            );
         }
-        contentPane.add(panel2, CC.xy(3, 1, CC.CENTER, CC.FILL));
+        contentPane.add(controlHolder, CC.xy(3, 1, CC.CENTER, CC.FILL));
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JPanel panel1;
-    private JPanel panel2;
+    private JPanel imageHolder;
+    private JPanel controlHolder;
     private JLabel label1;
     private JTextField textField1;
     private JLabel label2;
     private JTextField textField2;
-    private JButton button1;
-    private JButton button2;
+    private JButton kMeansBtn;
+    private JButton maximinBtn;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

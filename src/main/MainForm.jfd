@@ -12,53 +12,36 @@ new FormModel {
 				"$columnSpecs": "592dlu"
 				"$rowSpecs": "397dlu"
 			} ) {
-				name: "panel1"
+				name: "imageHolder"
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 			} )
-			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-				"$rowSpecs": "25dlu, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default"
-				"$columnSpecs": "97dlu"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq {par l {seq l {space :p:6:p, par l {comp kMeansBtn::l:p:116:p, comp label1:::p::p}}, seq l {space :::p, comp textField1:::p:116:p}, seq l {space :::p, comp label2:::p:116:p}, seq l {space :::p, comp textField2:::p:116:p}, seq l {space :::p, comp maximinBtn:::p:116:p}}, space ::5:x}}"
+				"$verticalGroup": "par l {seq {space :p:12:p, comp label1:::p::p, space :::p, comp textField1:::p::p, space s:::p, comp label2:::p::p, space u:::p, comp textField2:::p::p, space :p:46:p, comp kMeansBtn:::p::p, space s:::p, comp maximinBtn:::p::p, space :::p}}"
 			} ) {
-				name: "panel2"
+				name: "controlHolder"
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label1"
 					"text": "Number of observations:"
-				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-					"gridY": 1
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
 					name: "textField1"
-				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-					"gridX": 1
-					"gridY": 3
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label2"
 					"text": "Number of clusters:"
-				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-					"gridX": 1
-					"gridY": 7
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
 					name: "textField2"
-				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-					"gridX": 1
-					"gridY": 9
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button1"
+					name: "kMeansBtn"
 					"text": "K-means"
-				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-					"gridX": 1
-					"gridY": 13
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button2"
+					name: "maximinBtn"
 					"text": "Maximin"
-				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-					"gridX": 1
-					"gridY": 17
 				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
