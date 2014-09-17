@@ -3,8 +3,7 @@ package logic.strategy.impl;
 import entity.Cluster;
 import entity.Observation;
 import entity.ObservationContainer;
-import graphic.ClusterDrawer;
-import graphic.GraphicOutput;
+import graphic.ClusterOutput;
 import logic.strategy.ClusterizationStrategy;
 
 import java.util.List;
@@ -19,7 +18,7 @@ public class KMeansStrategy implements ClusterizationStrategy {
             clusters = container.createRandomEmptyClusters(clusterCount);
         }
 
-        new Thread(new ClusterDrawer(clusters)).start();
+        new Thread(new ClusterOutput(clusters)).start();
 
         int  i = 0;
         do {
@@ -28,7 +27,7 @@ public class KMeansStrategy implements ClusterizationStrategy {
                 assignCluster(clusters, observation);
             }
 
-            new Thread(new ClusterDrawer(clusters)).start();
+            new Thread(new ClusterOutput(clusters)).start();
 
             System.out.println("Iteration " + i++);
 

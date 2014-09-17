@@ -100,7 +100,6 @@ public class GraphicOutput {
     }
 
     public void repaintImageHolder() {
-        imageHolder.revalidate();
         imageHolder.repaint();
     }
 

@@ -46,7 +46,6 @@ public class MainForm extends JFrame {
                 ObservationContainer container =
                         new ObservationContainer(observationCount);
 
-                GraphicOutput.getInstance().repaintImageHolder();
 
                 List<Cluster> clusters =
                         context.executeStrategy(null, container, clusterCount);
@@ -62,7 +61,7 @@ public class MainForm extends JFrame {
     private void initComponents() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        imageHolder = new ImageHolder();
+        imageHolder = ImageHolder.getInstance();
         controlHolder = new JPanel();
         label1 = new JLabel();
         observationCountTxt = new JTextField();

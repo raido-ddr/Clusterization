@@ -27,7 +27,7 @@ public class ImageHolder extends JPanel {
         return instance;
     }
 
-    public ImageHolder() {
+    private ImageHolder() {
         canvas = new BufferedImage(IMG_WIDTH, IMG_HEIGHT, BufferedImage.TYPE_INT_RGB);
         imgGraphics = canvas.createGraphics();
         imgGraphics.setColor(Color.BLACK);
