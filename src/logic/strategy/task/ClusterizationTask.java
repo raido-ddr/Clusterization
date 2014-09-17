@@ -12,9 +12,9 @@ import java.util.List;
 
 public class ClusterizationTask extends SwingWorker<Void, List<Cluster>> {
 
-    private int clusterCount = 0;
+    private int clusterCount;
 
-    private int observationCount = 0;
+    private int observationCount;
 
     public ClusterizationTask(int clusterCount, int observationCount) {
         this.clusterCount = clusterCount;
@@ -24,18 +24,18 @@ public class ClusterizationTask extends SwingWorker<Void, List<Cluster>> {
     @Override
     protected Void doInBackground() throws Exception {
 
-        ClusterizationContext context =
-                new ClusterizationContext(new KMeansStrategy());
+
 
         ObservationContainer container =
                 new ObservationContainer(observationCount);
 
-        List<Cluster> clusters =
-                context.executeStrategy(null, container, clusterCount);
+        ClusterizationContext context =
+                new ClusterizationContext(new KMeansStrategy(null, container, clusterCount));
 
-        for(Cluster cluster : clusters) {
-            System.out.println(cluster.toString());
-        }
+
+                context.executeStrategy();
+
+
 
         return null;
     }

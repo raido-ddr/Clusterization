@@ -186,13 +186,6 @@ public class MainForm extends JFrame {
         return imageHolder;
     }
 
-    public JTextField getObservationCountTxt() {
-        return observationCountTxt;
-    }
 
-
-    public JTextField getClusterCountTxt() {
-        return clusterCountTxt;
-    }
 
 }

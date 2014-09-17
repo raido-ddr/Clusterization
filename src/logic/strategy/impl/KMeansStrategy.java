@@ -4,13 +4,31 @@ import entity.Cluster;
 import entity.Observation;
 import entity.ObservationContainer;
 import graphic.ClusterOutput;
+import graphic.GraphicOutput;
 import logic.strategy.ClusterizationStrategy;
 
+import javax.swing.*;
 import java.util.List;
 
-public class KMeansStrategy implements ClusterizationStrategy {
+public class KMeansStrategy extends ClusterizationStrategy  {
 
-    @Override
+    private List<Cluster> clusters;
+
+    private ObservationContainer container;
+
+    private int clusterCount;
+
+    private GraphicOutput output =
+            GraphicOutput.getInstance();
+
+    public KMeansStrategy(List<Cluster> clusters,
+            ObservationContainer container, int clusterCount) {
+        this.clusters = clusters;
+        this.container = container;
+        this.clusterCount = clusterCount;
+    }
+
+
     public List<Cluster> performClusterization(List<Cluster> clusters,
             ObservationContainer container, int clusterCount) {
 
@@ -74,6 +92,43 @@ public class KMeansStrategy implements ClusterizationStrategy {
     }
 
 
+    @Override
+    protected List<Cluster> doInBackground() throws Exception {
 
+        if(clusters == null) {
+            clusters = container.createRandomEmptyClusters(clusterCount);
+        }
 
+        //new Thread(new ClusterOutput(clusters)).start();
+        publish(clusters);
+
+        int  i = 0;
+        do {
+            resetClusters(clusters);
+            for (Observation observation : container.getObservations()) {
+                assignCluster(clusters, observation);
+            }
+
+            //new Thread(new ClusterOutput(clusters)).start();
+            publish(clusters);
+
+            System.out.println("Iteration " + i++);
+
+        } while (! isOptimal(clusters));
+
+        return clusters;
+    }
+
+    @Override
+    protected void process(List<List<Cluster>> chunks) {
+        output.clearImage();
+        output.drawClusters(chunks.get(0));
+    }
+
+    @Override
+    protected void done() {
+        for(Cluster cluster : clusters) {
+            System.out.println(cluster.toString());
+        }
+    }
 }

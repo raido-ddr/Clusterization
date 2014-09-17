@@ -23,4 +23,6 @@ public class ClusterOutput implements Runnable {
         output.clearImage();
         output.drawClusters(clusters);
     }
+
+
 }

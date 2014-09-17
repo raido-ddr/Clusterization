@@ -17,17 +17,17 @@ public class MainRunner {
     public static final int CLUSTER_COUNT = 8;
 
     public static void main(String[] args) {
-        ObservationContainer container =
+       /* ObservationContainer container =
                 new ObservationContainer(OBSERVATION_COUNT);
 
         ClusterizationContext context =
                 new ClusterizationContext(new KMeansStrategy());
 
         List<Cluster> clusters =
-                context.executeStrategy(null, container, CLUSTER_COUNT);
+                context.executeStrategy();
 
         for(Cluster cluster : clusters) {
             System.out.println(cluster.toString());
-        }
+        }*/
     }
 }
