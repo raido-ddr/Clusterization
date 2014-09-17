@@ -32,13 +32,19 @@ public class MainForm extends JFrame {
 
     private void kMeansBtnActionPerformed(ActionEvent e) {
 
+        kMeansBtn.setEnabled(false);
+
         int observationCount =
                 Integer.parseInt(observationCountTxt.getText());
 
         int clusterCount =
                 Integer.parseInt(clusterCountTxt.getText());
 
+
+
         new ClusterizationTask(clusterCount, observationCount).execute();
+
+        kMeansBtn.setEnabled(true);
 
         /*new Thread(new Runnable() {
             @Override
@@ -186,13 +192,6 @@ public class MainForm extends JFrame {
         return imageHolder;
     }
 
-    public JTextField getObservationCountTxt() {
-        return observationCountTxt;
-    }
 
-
-    public JTextField getClusterCountTxt() {
-        return clusterCountTxt;
-    }
 
 }

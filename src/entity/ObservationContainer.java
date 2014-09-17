@@ -4,6 +4,7 @@ package entity;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ObservationContainer {
 
@@ -23,7 +24,7 @@ public class ObservationContainer {
     }
 
     public List<Cluster> createRandomEmptyClusters(int clusterCount) {
-        List<Cluster> clusters = new ArrayList<Cluster>();
+        List<Cluster> clusters = new CopyOnWriteArrayList<>();
 
         for(int i = 0; i < clusterCount; i++) {
             clusters.add(new Cluster(getRandomObservation(), getRandomColor()));

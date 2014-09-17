@@ -4,6 +4,7 @@ import entity.Cluster;
 import entity.Observation;
 import entity.ObservationContainer;
 
+import javax.swing.*;
 import java.util.List;
 import java.util.Stack;
 
@@ -23,10 +24,8 @@ public class ClusterizationContext {
         this.strategy = strategy;
     }
 
-    public List<Cluster> executeStrategy(List<Cluster> clusters,
-            ObservationContainer container, int clusterCount) {
-
-        return strategy.performClusterization(clusters, container, clusterCount);
+    public void executeStrategy() {
+        strategy.execute();
     }
 
 

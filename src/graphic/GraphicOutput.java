@@ -39,7 +39,7 @@ public class GraphicOutput {
         return instance;
     }
 
-    public void drawClusters(List<Cluster> clusters) {
+    public synchronized void drawClusters(List<Cluster> clusters) {
 
         for(Cluster cluster : clusters) {
             drawCluster(cluster);
