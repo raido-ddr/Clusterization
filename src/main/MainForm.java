@@ -12,6 +12,7 @@ import entity.ObservationContainer;
 import graphic.GraphicOutput;
 import logic.strategy.ClusterizationContext;
 import logic.strategy.impl.KMeansStrategy;
+import logic.strategy.task.ClusterizationTask;
 
 
 public class MainForm extends JFrame {
@@ -31,7 +32,15 @@ public class MainForm extends JFrame {
 
     private void kMeansBtnActionPerformed(ActionEvent e) {
 
-        new Thread(new Runnable() {
+        int observationCount =
+                Integer.parseInt(observationCountTxt.getText());
+
+        int clusterCount =
+                Integer.parseInt(clusterCountTxt.getText());
+
+        new ClusterizationTask(clusterCount, observationCount).execute();
+
+        /*new Thread(new Runnable() {
             @Override
             public void run() {
                 int observationCount =
@@ -46,7 +55,6 @@ public class MainForm extends JFrame {
                 ObservationContainer container =
                         new ObservationContainer(observationCount);
 
-
                 List<Cluster> clusters =
                         context.executeStrategy(null, container, clusterCount);
 
@@ -54,7 +62,7 @@ public class MainForm extends JFrame {
                     System.out.println(cluster.toString());
                 }
             }
-        }).start();
+        }).start();*/
 
     }
 
@@ -177,4 +185,14 @@ public class MainForm extends JFrame {
     public ImageHolder getImageHolder() {
         return imageHolder;
     }
+
+    public JTextField getObservationCountTxt() {
+        return observationCountTxt;
+    }
+
+
+    public JTextField getClusterCountTxt() {
+        return clusterCountTxt;
+    }
+
 }
