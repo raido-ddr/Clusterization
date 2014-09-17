@@ -1,47 +1,61 @@
-/*
- * Created by JFormDesigner on Mon Sep 15 22:56:19 FET 2014
- */
-
 package main;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
+import java.util.List;
 import javax.swing.*;
 import com.jgoodies.forms.factories.*;
 import com.jgoodies.forms.layout.*;
 import entity.Cluster;
 import entity.ObservationContainer;
+import graphic.GraphicOutput;
 import logic.strategy.ClusterizationContext;
 import logic.strategy.impl.KMeansStrategy;
 
-/**
- * @author unknown
- */
+
 public class MainForm extends JFrame {
-    public MainForm() {
+
+    private static MainForm instance;
+
+    public static MainForm getInstance() {
+        if(instance == null) {
+            instance = new MainForm();
+        }
+        return instance;
+    }
+
+    private MainForm() {
         initComponents();
     }
 
     private void kMeansBtnActionPerformed(ActionEvent e) {
-        int observationCount =
-                Integer.parseInt(observationCountTxt.getText());
 
-        int clusterCount =
-                Integer.parseInt(clusterCountTxt.getText());
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int observationCount =
+                        Integer.parseInt(observationCountTxt.getText());
 
-        ClusterizationContext context =
-                new ClusterizationContext(new KMeansStrategy());
+                int clusterCount =
+                        Integer.parseInt(clusterCountTxt.getText());
 
-        ObservationContainer container =
-                new ObservationContainer(observationCount);
+                ClusterizationContext context =
+                        new ClusterizationContext(new KMeansStrategy());
 
-        java.util.List<Cluster> clusters =
-                context.executeStrategy(null, container, clusterCount);
+                ObservationContainer container =
+                        new ObservationContainer(observationCount);
 
-        for(Cluster cluster : clusters) {
-            System.out.println(cluster.toString());
-        }
+                GraphicOutput.getInstance().repaintImageHolder();
+
+                List<Cluster> clusters =
+                        context.executeStrategy(null, container, clusterCount);
+
+                for(Cluster cluster : clusters) {
+                    System.out.println(cluster.toString());
+                }
+            }
+        }).start();
 
     }
 
@@ -63,6 +77,8 @@ public class MainForm extends JFrame {
             "592dlu, $lcgap, 95dlu",
             "433dlu"));
         contentPane.add(imageHolder, CC.xy(1, 1, CC.DEFAULT, CC.FILL));
+        contentPane.revalidate();
+        contentPane.repaint();
 
         //======== controlHolder ========
         {
@@ -152,10 +168,14 @@ public class MainForm extends JFrame {
 
             @Override
             public void run() {
-                new MainForm().setVisible(true);
+                MainForm.getInstance().setVisible(true);
             }
 
         });
 
+    }
+
+    public ImageHolder getImageHolder() {
+        return imageHolder;
     }
 }

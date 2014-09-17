@@ -10,15 +10,27 @@ import java.awt.image.BufferedImage;
 public class ImageHolder extends JPanel {
 
     public static final int IMG_WIDTH = 1050;
+
     public static final int IMG_HEIGHT = 710;
 
     private BufferedImage canvas = null;
+
     private Graphics2D imgGraphics = null;
+
+    private static ImageHolder instance;
+
+    public static ImageHolder getInstance() {
+        if(instance == null) {
+            instance = new ImageHolder();
+        }
+
+        return instance;
+    }
 
     public ImageHolder() {
         canvas = new BufferedImage(IMG_WIDTH, IMG_HEIGHT, BufferedImage.TYPE_INT_RGB);
         imgGraphics = canvas.createGraphics();
-        imgGraphics.setColor(Color.WHITE);
+        imgGraphics.setColor(Color.BLACK);
         imgGraphics.fillRect(0,  0,  IMG_WIDTH, IMG_HEIGHT);
         setPreferredSize(new Dimension(IMG_WIDTH, IMG_HEIGHT));
     }
@@ -29,7 +41,7 @@ public class ImageHolder extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         int width = getWidth();
         int height = getHeight();
-        //g2d.setPaint(Color.BLUE);
+        g2d.setPaint(Color.BLUE);
         g2d.fillRect(0,  0,  width, height);
         g2d.drawImage(canvas, 0, 0, null);
         //drawWindow((Graphics2D) imgGraphics);

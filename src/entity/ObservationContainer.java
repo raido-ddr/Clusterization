@@ -7,9 +7,9 @@ import java.util.List;
 
 public class ObservationContainer {
 
-    private static final int X_LIMIT = 600;
+    private static final int X_LIMIT = 1050;
 
-    public static final long Y_LIMIT = 500;
+    public static final long Y_LIMIT = 710;
 
     private List<Observation> observations;
 
